@@ -1,0 +1,221 @@
+.oceanBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(180deg, #c1e3ff 0%, #82c6ff 80%, #4b9fe1 100%);
+  pointer-events: none;
+}
+
+.element {
+  position: absolute;
+  transition: top 0.2s ease-in-out;
+}
+
+.bubble {
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.bubbleInner {
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+  transform: translate(25%, -25%);
+}
+
+.fish {
+  display: flex;
+  align-items: center;
+}
+
+.fishShape {
+  width: 100%;
+  height: 100%;
+  background-color: #FF9D5C;
+  border-radius: 50% 60% 20% 40%;
+  position: relative;
+}
+
+.fishShape::before {
+  content: '';
+  position: absolute;
+  top: 25%;
+  right: -20%;
+  width: 40%;
+  height: 50%;
+  background-color: #FF9D5C;
+  border-radius: 0 60% 60% 0;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.fishShape::after {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 15%;
+  width: 15%;
+  height: 15%;
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.shrimp {
+  display: flex;
+  align-items: center;
+}
+
+.shrimpShape {
+  width: 100%;
+  height: 60%;
+  background-color: #FF6B6B;
+  border-radius: 40% 60% 60% 40%;
+  position: relative;
+}
+
+.shrimpShape::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: 80%;
+  height: 40%;
+  border-radius: 50%;
+  border: 2px solid #FF6B6B;
+  border-bottom: none;
+  transform: translateX(-50%) rotate(-20deg);
+}
+
+.crab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 气泡样式 */
+.bubblesContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-50vh) rotate(180deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0.4;
+  }
+}
+
+/* 海洋生物样式 */
+.marineLifeContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.fish {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  background-image: url('/fish-icon.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fishSwim 15s linear infinite;
+  opacity: 0.6;
+}
+
+.crab {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-image: url('/crab-icon.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: crabWalk 20s linear infinite;
+  opacity: 0.6;
+}
+
+.starfish {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-image: url('/starfish-icon.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: starfishMove 30s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+@keyframes fishSwim {
+  0% {
+    transform: translateX(-100px) scaleX(1);
+  }
+  49% {
+    transform: translateX(calc(100vw + 100px)) scaleX(1);
+  }
+  50% {
+    transform: translateX(calc(100vw + 100px)) scaleX(-1);
+  }
+  99% {
+    transform: translateX(-100px) scaleX(-1);
+  }
+  100% {
+    transform: translateX(-100px) scaleX(1);
+  }
+}
+
+@keyframes crabWalk {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(100px) rotate(10deg);
+  }
+  50% {
+    transform: translateX(0) rotate(0deg);
+  }
+  75% {
+    transform: translateX(-100px) rotate(-10deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes starfishMove {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+/* 底部波浪 */
+.bottomWave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+} 

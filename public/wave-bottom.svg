@@ -1,0 +1,6 @@
+<svg width="1440" height="120" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+  <path 
+    fill="#0066cc" 
+    fill-opacity="0.2"
+    d="M0,0 L1440,0 L1440,60 C1320,40 1260,80 1200,60 C960,0 720,100 480,60 C240,20 160,80 0,60 L0,0 Z" />
+</svg> 

@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["extendedWhereUnique", "fullTextSearch", "filteredRelationCount"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+  relationMode = "prisma"
+}
+
+// User model
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  password      String
+  name          String?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  comments      Comment[]
+
+  @@index([email])
+  @@index([role])
+  @@index([createdAt])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// Marine life category model
+model Category {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  imageUrl    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  species     Species[]
+
+  @@index([name])
+  @@index([createdAt])
+}
+
+// Marine species model
+model Species {
+  id                String    @id @default(uuid())
+  name              String
+  scientificName    String    @unique
+  foreignName       String?
+  protectionLevel   String?
+  description       String?
+  habitat           String?
+  distribution      String?
+  altitude          String?
+  habits            String?
+  reproduction      String?
+  isEdible          Boolean   @default(false)
+  cookingMethods    String?
+  isFeatured        Boolean   @default(false)
+  categoryId        String
+  category          Category  @relation(fields: [categoryId], references: [id])
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  images            Image[]
+  comments          Comment[]
+
+  @@index([categoryId])
+  @@index([isFeatured])
+  @@index([name])
+  @@index([createdAt])
+  @@index([scientificName])
+  @@index([protectionLevel])
+  @@index([isEdible])
+}
+
+// Image model
+model Image {
+  id        String   @id @default(uuid())
+  url       String
+  caption   String?
+  speciesId String
+  species   Species  @relation(fields: [speciesId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([speciesId])
+  @@index([createdAt])
+}
+
+// Comment model
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  speciesId String
+  species   Species  @relation(fields: [speciesId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([speciesId])
+  @@index([createdAt])
+}
+
+// Website settings model
+model Setting {
+  key       String   @id
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}
