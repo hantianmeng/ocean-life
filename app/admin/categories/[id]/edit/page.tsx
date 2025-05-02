@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { MdArrowBack, MdCloudUpload } from 'react-icons/md';
 import { use } from 'react';
@@ -14,13 +14,10 @@ interface Category {
   imageUrl: string | null;
 }
 
-type PageParams = {
-  params: { id: string };
-}
-
-export default function EditCategoryPage({ params }: PageParams) {
+export default function EditCategoryPage() {
   const router = useRouter();
-  const categoryId = use(params).id; // 使用React.use()解包params
+  const params = useParams();
+  const categoryId = params.id as string;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [category, setCategory] = useState<Category | null>(null);
   const [formData, setFormData] = useState({

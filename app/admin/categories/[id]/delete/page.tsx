@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { MdArrowBack, MdDelete, MdWarning } from 'react-icons/md';
 import Image from 'next/image';
@@ -17,13 +17,10 @@ interface Category {
   };
 }
 
-type PageParams = {
-  params: { id: string };
-}
-
-export default function DeleteCategoryPage({ params }: PageParams) {
+export default function DeleteCategoryPage() {
   const router = useRouter();
-  const categoryId = params.id;
+  const params = useParams();
+  const categoryId = params.id as string;
   
   const [category, setCategory] = useState<Category | null>(null);
   const [isLoading, setIsLoading] = useState(true);

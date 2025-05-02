@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, useRef, useTransition, use } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { MdArrowBack, MdCloudUpload } from 'react-icons/md';
 import Image from 'next/image';
-import { use } from 'react';
 
 // 定义类型
 interface Category {
@@ -44,13 +43,10 @@ interface UploadStatus {
   preview: string;
 }
 
-type PageParams = {
-  params: { id: string };
-}
-
-export default function EditSpeciesPage({ params }: PageParams) {
+export default function EditSpeciesPage() {
   const router = useRouter();
-  const speciesId = use(params).id;
+  const params = useParams();
+  const speciesId = params.id as string;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [categories, setCategories] = useState<Category[]>([]);
   const [species, setSpecies] = useState<Species | null>(null);

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { MdArrowBack, MdDelete, MdWarning } from 'react-icons/md';
 
@@ -15,13 +15,10 @@ interface Species {
   images?: { url: string }[];
 }
 
-type PageParams = {
-  params: { id: string };
-}
-
-export default function DeleteSpeciesPage({ params }: PageParams) {
+export default function DeleteSpeciesPage() {
   const router = useRouter();
-  const speciesId = params.id;
+  const params = useParams();
+  const speciesId = params.id as string;
   
   const [species, setSpecies] = useState<Species | null>(null);
   const [isLoading, setIsLoading] = useState(true);
