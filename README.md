@@ -93,6 +93,6 @@ npm run start
 安装依赖: npm install
 初始化数据库: npx prisma migrate dev
 填充测试数据: npm run seed
-安装date-fns日期处理库：npm install date-fns
+安装date-fns日期处理库:npm install date-fns
 安装 react-hot-toast 库npm install react-hot-toast
 启动开发服务器: npm run dev
