@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { getAllOceanAnimals, getEndangeredAnimals } from '@/lib/supabase'
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     // 获取URL查询参数
-    const { searchParams } = new URL(request.url)
+    const searchParams = request.nextUrl.searchParams
     const endangered = searchParams.get('endangered')
     
     // 根据查询参数决定获取哪些数据

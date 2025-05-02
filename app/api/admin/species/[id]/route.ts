@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { prisma } from '@/app/lib/db';
@@ -6,12 +6,12 @@ import { invalidateCache, invalidateCacheByPrefix } from '@/lib/cache';
 
 // GET: 获取单个物种的详细信息
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
   try {
     // 确保params是已解析的
-    const id = params?.id;
+    const id = context.params?.id;
     if (!id) {
       return NextResponse.json(
         { error: '无效的物种ID' },
@@ -60,12 +60,12 @@ export async function GET(
 
 // PATCH: 更新物种信息
 export async function PATCH(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
   try {
     // 确保params是已解析的
-    const id = params?.id;
+    const id = context.params?.id;
     if (!id) {
       return NextResponse.json(
         { error: '无效的物种ID' },
@@ -204,12 +204,12 @@ export async function PATCH(
 
 // DELETE: 删除物种
 export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
   try {
     // 确保params是已解析的
-    const id = params?.id;
+    const id = context.params?.id;
     if (!id) {
       return NextResponse.json(
         { error: '无效的物种ID' },
