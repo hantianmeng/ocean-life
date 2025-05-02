@@ -7,6 +7,7 @@
     "redis": "node scripts/startRedis.js",
     "dev:redis": "npm run redis & npm run dev",
     "build": "next build",
+    "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint",
     "seed": "npx ts-node scripts/seed.ts"

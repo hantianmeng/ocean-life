@@ -4,19 +4,14 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { prisma } from '@/app/lib/db';
 import { invalidateCache } from '@/lib/cache';
 
-// 定义正确的参数类型
-type RouteContextParams = {
-  params: { id: string }
-}
-
 // GET: 获取单个分类的详细信息
 export async function GET(
   request: Request,
-  context: RouteContextParams
+  { params }: { params: { id: string } }
 ) {
   try {
     // 确保params是已解析的
-    const id = context.params?.id;
+    const id = params?.id;
     if (!id) {
       return NextResponse.json(
         { error: '无效的分类ID' },
@@ -53,11 +48,11 @@ export async function GET(
 // PATCH: 更新分类信息
 export async function PATCH(
   request: Request,
-  context: RouteContextParams
+  { params }: { params: { id: string } }
 ) {
   try {
     // 确保params是已解析的
-    const id = context.params?.id;
+    const id = params?.id;
     if (!id) {
       return NextResponse.json(
         { error: '无效的分类ID' },
@@ -146,7 +141,7 @@ export async function PATCH(
 // DELETE: 删除分类
 export async function DELETE(
   request: Request,
-  context: RouteContextParams
+  { params }: { params: { id: string } }
 ) {
   try {
     // 获取当前会话信息
@@ -162,7 +157,7 @@ export async function DELETE(
     
     // 检查分类是否存在
     const category = await prisma.category.findUnique({
-      where: { id: context.params.id },
+      where: { id: params.id },
       include: { 
         _count: { 
           select: { species: true } 
@@ -187,7 +182,7 @@ export async function DELETE(
     
     // 删除分类
     await prisma.category.delete({
-      where: { id: context.params.id }
+      where: { id: params.id }
     });
     
     // 返回成功响应
