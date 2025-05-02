@@ -14,7 +14,11 @@ interface Category {
   imageUrl: string | null;
 }
 
-export default function EditCategoryPage({ params }: { params: { id: string } }) {
+type PageParams = {
+  params: { id: string };
+}
+
+export default function EditCategoryPage({ params }: PageParams) {
   const router = useRouter();
   const categoryId = use(params).id; // 使用React.use()解包params
   const fileInputRef = useRef<HTMLInputElement>(null);

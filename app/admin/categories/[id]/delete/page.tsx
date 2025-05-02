@@ -17,7 +17,11 @@ interface Category {
   };
 }
 
-export default function DeleteCategoryPage({ params }: { params: { id: string } }) {
+type PageParams = {
+  params: { id: string };
+}
+
+export default function DeleteCategoryPage({ params }: PageParams) {
   const router = useRouter();
   const categoryId = params.id;
   

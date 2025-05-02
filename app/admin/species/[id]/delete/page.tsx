@@ -15,7 +15,11 @@ interface Species {
   images?: { url: string }[];
 }
 
-export default function DeleteSpeciesPage({ params }: { params: { id: string } }) {
+type PageParams = {
+  params: { id: string };
+}
+
+export default function DeleteSpeciesPage({ params }: PageParams) {
   const router = useRouter();
   const speciesId = params.id;
   

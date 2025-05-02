@@ -44,7 +44,11 @@ interface UploadStatus {
   preview: string;
 }
 
-export default function EditSpeciesPage({ params }: { params: { id: string } }) {
+type PageParams = {
+  params: { id: string };
+}
+
+export default function EditSpeciesPage({ params }: PageParams) {
   const router = useRouter();
   const speciesId = use(params).id;
   const fileInputRef = useRef<HTMLInputElement>(null);
